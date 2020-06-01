@@ -11,11 +11,13 @@ public class ParticleCreator extends PApplet {
     }
 
     public void setup() {
-        zombie = new Zombie(this, 200, 200, 300);
+        human = new Human (250,450,this);
     }
 
     public void draw() {
         background(255);
-        zombie.display();
+        //zombie.display();
+        human.display();
+        human.move();
     }
 }

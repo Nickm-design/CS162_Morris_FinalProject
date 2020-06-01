@@ -5,8 +5,7 @@ public class Human extends Particle {
 
     PApplet humanSketch;
     int color;
-
-    Particle particle;
+    int x, y;
 
     public Human(int x, int y, PApplet p) {
         super(x, y, p);
@@ -20,8 +19,12 @@ public class Human extends Particle {
 
     public void display() {
         this.humanSketch.fill(color);
-        this.humanSketch.circle(x, y, 10);
+        this.humanSketch.circle(this.x, this.y, 10);
+    }
 
+    public void setCoordinates() {
+        setX((int)humanSketch.random(500));
+        setY((int)humanSketch.random(455,495));
     }
 
     public void move() {
@@ -37,5 +40,21 @@ public class Human extends Particle {
                 this.y++;
             }
         }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

@@ -11,7 +11,10 @@ public class ParticleCreator extends PApplet {
     }
 
     public void setup() {
-        human = new Human (250,450,this);
+        zombie.setCoordinates();
+        human.setCoordinates();
+        human = new Human(zombie.getX(),zombie.getY(),this);
+        zombie = new Zombie(human.getX(), human.getY(), this);
     }
 
     public void draw() {
@@ -19,5 +22,7 @@ public class ParticleCreator extends PApplet {
         //zombie.display();
         human.display();
         human.move();
+        zombie.display();
+        zombie.move();
     }
 }

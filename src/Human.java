@@ -1,30 +1,34 @@
 import processing.core.PApplet;
 
 
-public class Human extends Particle {
+public class Human extends Person {
 
     PApplet humanSketch;
-    int color;
-    int x, y;
 
     public Human(int x, int y, PApplet p) {
         super(x, y, p);
         humanSketch = p;
-        color = humanSketch.color(0,0,humanSketch.random(255));
+        this.color = humanSketch.color(0,0,humanSketch.random(255));
+        this.humanRadius = (int) humanSketch.random(10, 30);
+        setHumanRadius(humanRadius);
+        this.numberOfHumans += 1;
     }
 
     public void name() {
-
+        humanSketch.fill(color);
+        humanSketch.textSize(25);
+        //humanSketch.text("Humans", humanSketch.width/2, humanSketch.height/4);
     }
 
     public void display() {
         this.humanSketch.fill(color);
-        this.humanSketch.circle(this.x, this.y, 10);
+        this.humanSketch.circle(this.x, this.y, humanRadius);
     }
 
-    public void setCoordinates() {
-        setX((int)humanSketch.random(500));
-        setY((int)humanSketch.random(455,495));
+    public void displayCounter() {
+        humanSketch.fill(color);
+        humanSketch.textSize(25);
+        humanSketch.text("Number of Humans: " + numberOfHumans, humanSketch.width/4, humanSketch.height/4);
     }
 
     public void move() {
@@ -34,27 +38,11 @@ public class Human extends Particle {
                 this.x++;
             } else if (choice < 50) { //25%
                 this.x--;
-            } else if (choice < 80){ //30%
+            } else if (choice < 70){ //20%
                 this.y--;
-            } else { //20%
+            } else { //30%
                 this.y++;
             }
         }
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 }

@@ -1,21 +1,33 @@
 import processing.core.PApplet;
 
 
-public class Zombie extends Particle {
+public class Zombie extends Person {
 
     PApplet zombieSketch;
-    int color;
-    int x, y;
 
     public Zombie(int x, int y, PApplet p) {
         super(x, y, p);
         zombieSketch = p;
-        color = zombieSketch.color(0,0,zombieSketch.random(255));
+        this.color = zombieSketch.color(zombieSketch.random(200, 250),zombieSketch.random(200, 250),0);
+        this.zombieRadius = (int) zombieSketch.random(10, 50);
+        setZombieRadius(zombieRadius);
+        this.numberOfZombies += 1;
+    }
+
+    public void name() {
+        zombieSketch.fill(color);
+        zombieSketch.textSize(25);
+        //zombieSketch.text("Zombies", zombieSketch.width/2, 600);
     }
 
     public void display() {
+        this.zombieSketch.fill(color);
+        this.zombieSketch.circle(this.x, this.y, zombieRadius);
+    }
+    public void displayCounter() {
         zombieSketch.fill(color);
-        zombieSketch.circle(this.x, this.y, 30);
+        zombieSketch.textSize(25);
+        zombieSketch.text("Number of Humans: " + numberOfZombies, zombieSketch.width/4, 600);
     }
 
     public void move() {
@@ -31,26 +43,5 @@ public class Zombie extends Particle {
                 this.y++;
             }
         }
-    }
-
-    public void setCoordinates() {
-        setX((int)zombieSketch.random(500));
-        setY((int)zombieSketch.random(5, 50));
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 }

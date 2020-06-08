@@ -43,5 +43,4 @@ class Particle {
         y += yVelocity;
         yVelocity += ACCELERATION;
     }
-
 }

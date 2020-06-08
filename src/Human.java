@@ -5,24 +5,20 @@ public class Human extends Person {
 
     PApplet humanSketch;
 
+    public Human() {
+    }
+
     public Human(int x, int y, PApplet p) {
         super(x, y, p);
         humanSketch = p;
         this.color = humanSketch.color(0,0,humanSketch.random(255));
-        this.humanRadius = (int) humanSketch.random(10, 30);
-        setHumanRadius(humanRadius);
+        this.radius = (int) humanSketch.random(10, 30);
         this.numberOfHumans += 1;
-    }
-
-    public void name() {
-        humanSketch.fill(color);
-        humanSketch.textSize(25);
-        //humanSketch.text("Humans", humanSketch.width/2, humanSketch.height/4);
     }
 
     public void display() {
         this.humanSketch.fill(color);
-        this.humanSketch.circle(this.x, this.y, humanRadius);
+        this.humanSketch.circle(this.x, this.y, this.radius);
     }
 
     public void displayCounter() {
@@ -44,5 +40,9 @@ public class Human extends Person {
                 this.y++;
             }
         }
+    }
+
+    public boolean touchingZombie(Zombie person) {
+        return (p.dist(this.x,this.y,person.x,person.y) < (this.radius + person.radius));
     }
 }

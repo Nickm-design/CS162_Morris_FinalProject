@@ -5,29 +5,25 @@ public class Zombie extends Person {
 
     PApplet zombieSketch;
 
+    public Zombie() {
+    }
+
     public Zombie(int x, int y, PApplet p) {
         super(x, y, p);
         zombieSketch = p;
         this.color = zombieSketch.color(zombieSketch.random(200, 250),zombieSketch.random(200, 250),0);
-        this.zombieRadius = (int) zombieSketch.random(10, 50);
-        setZombieRadius(zombieRadius);
+        this.radius = (int) zombieSketch.random(10, 50);
         this.numberOfZombies += 1;
-    }
-
-    public void name() {
-        zombieSketch.fill(color);
-        zombieSketch.textSize(25);
-        //zombieSketch.text("Zombies", zombieSketch.width/2, 600);
     }
 
     public void display() {
         this.zombieSketch.fill(color);
-        this.zombieSketch.circle(this.x, this.y, zombieRadius);
+        this.zombieSketch.circle(this.x, this.y, this.radius);
     }
     public void displayCounter() {
         zombieSketch.fill(color);
         zombieSketch.textSize(25);
-        zombieSketch.text("Number of Humans: " + numberOfZombies, zombieSketch.width/4, 600);
+        zombieSketch.text("Number of Zombies: " + numberOfZombies, zombieSketch.width/4, 600);
     }
 
     public void move() {
@@ -43,5 +39,17 @@ public class Zombie extends Person {
                 this.y++;
             }
         }
+    }
+
+    public boolean touchingHuman(Human person) {
+        return (p.dist(this.x,this.y,person.x,person.y) < person.radius + this.radius);
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
     }
 }
